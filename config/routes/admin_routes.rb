@@ -3,6 +3,14 @@
 namespace :admin, path: "", constraints: { subdomain: "admin" } do
   devise_for :users, skip: %i[registration]
 
+  resource :me, controller: :current_user, only: [] do
+    get :otp
+    get :otp_qrcode
+    post :otp_backup_codes
+    post :enable_otp
+    post :disable_otp
+  end
+
   resource :password, only: %i[edit update]
 
   put '/locales/fetch' => 'locales#fetch', as: :update_locales

@@ -38,7 +38,10 @@ en:
     workers: Workers
     trade_hubs: Trade Hubs
     commodities: Commodities
+    otp: 2-Factor-Auth
   title:
+    devise:
+      otp: 2-Factor-Authentication
     admin: FleetYards.net Backend
     component:
       edit: Edit Component
