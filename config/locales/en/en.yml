@@ -7,9 +7,10 @@ en:
   mailer:
     hello: Hello %{username}!
     model:
-      admin:
-        subject: New Model
-        headline: New Model
+      new:
+        subject: New Ship/Vehicle added
+        headline: New Ship/Vehicle added
+        body: "Allow me to introduce: The"
     transmission_end: "--- incomming transmission ---"
     transmission_start: "--- incomming transmission ---"
     user:
@@ -42,6 +43,19 @@ en:
   title:
     devise:
       otp: 2-Factor-Authentication
+    frontend:
+      home: Home
+      images: Images
+      cargo: Cargo
+      commodities: Commodities
+      fleets: Fleets
+      hangar: My Hangar
+      public_hangar: "%{user} Hangar"
+      impressum: Impressum
+      privacy: Privacy Policy
+      login: Login
+      sign_up: Sign Up
+      password_request: Request Password
     admin: FleetYards.net Backend
     component:
       edit: Edit Component
@@ -51,7 +65,6 @@ en:
     default: FleetYards.net
     image:
       index: All Images
-    impressum: Impressum
     manufacturer:
       edit: Edit Manufacturer
       index: Manufacturers
@@ -60,6 +73,10 @@ en:
       edit: Edit Model
       index: Models
       new: New Model
+    station:
+      edit: Edit Station
+      index: Stations
+      new: New Station
     trade_hub:
       edit: Edit Trade Hub
       index: Trade Hubs
@@ -69,12 +86,11 @@ en:
       index: Commodities
       new: New Commodity
     not_found: 404
-    password:
-      new: Forgot your Password?
-    privacy: Privacy policy
-    server_error: 500
     sign_in: Login
-    sign_up: Sign up
+    password:
+      edit: Change Password
+      new: Forgot your Password?
+    server_error: 500
     unlock: Unlock Account
     unprocessable_entity: 422
     user:

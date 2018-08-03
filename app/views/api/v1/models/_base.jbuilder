@@ -15,6 +15,8 @@ json.min_crew model.display_min_crew
 json.max_crew model.display_max_crew
 json.scm_speed model.display_scm_speed
 json.afterburner_speed model.display_afterburner_speed
+json.ground_speed model.display_ground_speed
+json.afterburner_ground_speed model.display_afterburner_ground_speed
 json.pitch_max model.pitch_max
 json.yaw_max model.yaw_max
 json.roll_max model.roll_max
@@ -32,5 +34,6 @@ json.on_sale model.on_sale
 json.production_status model.production_status
 json.production_note model.production_note
 json.classification model.classification
+json.classification_label model.classification&.humanize
 json.focus model.focus
 json.rsi_id model.rsi_id

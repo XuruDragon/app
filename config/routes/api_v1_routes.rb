@@ -38,6 +38,7 @@ v1_api_routes = lambda do
       get :current
       put 'current' => 'users#update'
       patch 'current' => 'users#update'
+      delete 'current' => 'users#destroy'
       post 'check-email'
       post 'check-username'
       post 'start-rsi-verification'
@@ -66,6 +67,8 @@ v1_api_routes = lambda do
   resources :trade_hubs, path: 'trade-hubs', only: [:index]
   resources :commodities, only: [:index]
   resources :commodity_prices, path: 'commodity-prices', only: %i[show create]
+
+  resources :stations, param: :slug, only: %i[index show]
 
   namespace :rsi do
     resources :citizens, only: [:show], param: :handle

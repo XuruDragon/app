@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_191907) do
+ActiveRecord::Schema.define(version: 2018_07_23_205500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 2018_05_06_191907) do
     t.string "component_class"
     t.string "slug"
     t.string "component_type"
+  end
+
+  create_table "docks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.integer "dock_type"
+    t.uuid "station_id"
+    t.string "name"
+    t.integer "max_ship_size"
+    t.integer "min_ship_size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fleet_memberships", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -189,7 +199,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_191907) do
     t.decimal "zaxis_acceleration", precision: 15, scale: 2
     t.string "fleetchart_image"
     t.datetime "store_images_updated_at"
-    t.boolean "hidden", default: false
+    t.boolean "hidden", default: true
     t.datetime "last_updated_at"
     t.decimal "fallback_beam", precision: 15, scale: 2
     t.decimal "fallback_length", precision: 15, scale: 2
@@ -205,6 +215,50 @@ ActiveRecord::Schema.define(version: 2018_05_06_191907) do
     t.string "rsi_name"
     t.string "rsi_slug"
     t.string "brochure"
+    t.decimal "ground_speed", precision: 15, scale: 2
+    t.decimal "afterburner_ground_speed", precision: 15, scale: 2
+    t.boolean "notified", default: false
+  end
+
+  create_table "planets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.uuid "starsystem_id"
+    t.uuid "planet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shops", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "starsystems", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "station_shops", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "station_id"
+    t.uuid "shop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.uuid "planet_id"
+    t.integer "station_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
+    t.string "store_image"
   end
 
   create_table "task_forces", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -261,7 +315,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_191907) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "rsi_handle", limit: 255
-    t.boolean "sale_notify", default: true
+    t.boolean "sale_notify", default: false
     t.string "rsi_org"
     t.boolean "rsi_verified", default: false
     t.string "rsi_verification_token"
@@ -285,8 +339,9 @@ ActiveRecord::Schema.define(version: 2018_05_06_191907) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "purchased", default: false
-    t.boolean "sale_notify", default: true
+    t.boolean "sale_notify", default: false
     t.boolean "flagship", default: false
+    t.boolean "name_visible", default: false
   end
 
   create_table "videos", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

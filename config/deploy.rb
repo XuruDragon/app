@@ -2,6 +2,7 @@
 
 set :shared_dirs, [
   'public/uploads',
+  'public/packs',
   'tmp/pids',
   'tmp/sockets',
   'dumps'
@@ -30,6 +31,8 @@ set :repository, 'https://github.com/fleetyards/api.git'
 set :rails_env, 'production'
 set :branch, 'master'
 set :version_scheme, :datetime
+
+set :force_asset_precompile, true
 
 task :remote_environment do
   invoke :'rbenv:load'
@@ -114,6 +117,13 @@ namespace :db do
       comment %(Loading Schema for database)
       command %(#{fetch(:rake)} db:schema:load)
       invoke :'server:start'
+    end
+  end
+
+  task seed: :remote_environment do
+    in_path fetch(:current_path).to_s do
+      comment %(Seeding database)
+      command %(#{fetch(:rake)} db:seed)
     end
   end
 
